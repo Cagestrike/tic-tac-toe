@@ -1,0 +1,11 @@
+{
+  "name": "tic-and-toe",
+  "version": "1.0.0",
+  "description": "Simple tic and toe game made using html and js",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cagestrike",
+  "license": "ISC"
+}

@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#grid {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* background-color: black; */
+    min-width: 200px;
+    min-height: 200px;
+    width: 80vw;
+    height: 80vw;
+}
+
+@media only screen and (min-width: 768px) {
+    #grid {
+        max-width: 500px;
+        max-height: 500px;
+    }
+}
+
+.grid-item {
+    position: relative;
+}
+
+.border-bottom {
+    border-bottom: solid black 1px;
+}
+
+.border-right {
+    border-right: solid black 1px;
+}
+
+.grid-item:hover {
+    cursor: pointer;
+}
+
+/* .clicked-x {
+    background-color: darkred;
+}
+
+.clicked-o {
+    background-color: darkblue;
+} */
+
+.unclickable {
+    pointer-events: none;
+    cursor: default;
+}
+
+.sign-x {
+    color: darkblue;
+    font-size: 256px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sign-o {
+    color: darkred;
+    font-size: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+@media only screen and (max-width: 600px) {
+    .sign-x {
+        font-size: 150px;
+    }
+
+    .sign-o {
+        font-size: 70px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .sign-x {
+        font-size: 110px;
+    }
+
+    .sign-o {
+        font-size: 50px;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .sign-x {
+        font-size: 90px;
+    }
+
+    .sign-o {
+        font-size: 40px;
+    }
+}
