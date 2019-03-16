@@ -22,6 +22,7 @@ const winningCombos = [
 const cells = document.querySelectorAll('.grid-item');
 const header = document.getElementById('move');
 const newGameBtn = document.getElementById('new-game');
+const winningScreen = document.getElementById('winning-screen');
 
 cells.forEach(el => {
     el.addEventListener('click', turnClick);
@@ -38,18 +39,36 @@ function newGame() {
         el.classList.remove('unclickable');
         el.innerHTML = '';
     });
-    header.innerHTML = "Current move: " + currentPlayer.type.toUpperCase();
+    header.innerHTML = "current move: " + currentPlayer.type;
+    newGameBtn.style.display = "none";
 }
 
 function turnClick() {
     updateGameBoard(this);
+
     if (hasWon()) {
-
+        showWinningScreen();
         console.log(currentPlayer.type + " has won!");
+    } else if (isDraw()) {
+        showDrawScreen();
+        console.log('draw!');
+    } else {
+        currentPlayer = currentPlayer == playerX ? playerO : playerX;
+        header.innerHTML = "current move: " + currentPlayer.type;
     }
+}
 
-    currentPlayer = currentPlayer == playerX ? playerO : playerX;
-    header.innerHTML = "Current move: " + currentPlayer.type.toLocaleUpperCase();
+function showWinningScreen() {
+    header.innerHTML = currentPlayer.type + " has won!";
+    cells.forEach(el => {
+        el.classList.add('unclickable');
+    });
+    newGameBtn.style.display = "block";
+}
+
+function showDrawScreen() {
+    header.innerHTML = "draw!";
+    newGameBtn.style.display = "block";
 }
 
 function updateGameBoard(el) {
@@ -86,6 +105,13 @@ function hasWon() {
         })) return true;
     }
     return false;
+}
+
+function isDraw() {
+    for (let i = 0; i < cells.length; i++) {
+        if (!cells[i].classList.contains('unclickable')) return false;
+    }
+    return true;
 }
 
 function displayWinMessage() {

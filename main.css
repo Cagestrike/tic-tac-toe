@@ -1,6 +1,11 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background: #16a085;
 }
 
 #grid {
@@ -12,6 +17,15 @@
     min-height: 200px;
     width: 80vw;
     height: 80vw;
+}
+
+#move {
+    text-align: center;
+}
+
+#new-game {
+    display: block;
+    margin: 0 auto;
 }
 
 @media only screen and (min-width: 768px) {
@@ -37,17 +51,20 @@
     cursor: pointer;
 }
 
-/* .clicked-x {
-    background-color: darkred;
-}
-
-.clicked-o {
-    background-color: darkblue;
-} */
-
 .unclickable {
     pointer-events: none;
     cursor: default;
+}
+
+.btn {
+    font-size: 36px;
+    text-transform: lowercase;
+    border: none;
+    background: none;
+}
+
+.btn:hover {
+    color: white;
 }
 
 .sign-x {
