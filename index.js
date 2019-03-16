@@ -1,9 +1,11 @@
 const playerX = {
     type: "x",
+    sign: '&times;',
     shots: []
 };
 const playerO = {
     type: "o",
+    sign: '&bigcirc;',
     shots: []
 };
 let currentPlayer;
@@ -22,7 +24,6 @@ const winningCombos = [
 const cells = document.querySelectorAll('.grid-item');
 const header = document.getElementById('move');
 const newGameBtn = document.getElementById('new-game');
-const winningScreen = document.getElementById('winning-screen');
 
 cells.forEach(el => {
     el.addEventListener('click', turnClick);
@@ -48,14 +49,19 @@ function turnClick() {
 
     if (hasWon()) {
         showWinningScreen();
-        console.log(currentPlayer.type + " has won!");
-    } else if (isDraw()) {
-        showDrawScreen();
-        console.log('draw!');
-    } else {
-        currentPlayer = currentPlayer == playerX ? playerO : playerX;
-        header.innerHTML = "current move: " + currentPlayer.type;
     }
+    else if (isDraw()) {
+        showDrawScreen();
+    }
+    else {
+        changePlayer();
+    }
+
+}
+
+function changePlayer() {
+    currentPlayer = currentPlayer == playerX ? playerO : playerX;
+    header.innerHTML = "current move: " + currentPlayer.type;
 }
 
 function showWinningScreen() {
@@ -72,12 +78,8 @@ function showDrawScreen() {
 }
 
 function updateGameBoard(el) {
-    el.classList.add('clicked-' + currentPlayer.type, 'unclickable');
-    if (currentPlayer.type == 'x') {
-        el.innerHTML = '<p class="sign-x">&times;</p>'
-    } else if (currentPlayer.type == 'o') {
-        el.innerHTML = '<p class="sign-o">&bigcirc;</p>'
-    }
+    el.classList.add('unclickable');
+    el.innerHTML = '<p class="sign-' + currentPlayer.type + '">' + currentPlayer.sign + '</p>';
     currentPlayer.shots.push(Number(el.id));
 
     console.log(currentPlayer.type + " has clicked " + el.id);
@@ -85,18 +87,6 @@ function updateGameBoard(el) {
 
 function hasWon() {
     if (currentPlayer.shots.length < 3) return false;
-
-    // currentPlayer.shots = currentPlayer.shots.sort((a, b) => a - b);
-    // let stringShots = JSON.stringify(currentPlayer.shots).slice(1, this.length - 1);
-    // console.log(stringShots);
-
-    // for (let i = 0; i < winningCombos.length; i++) {
-    //     let stringWins = JSON.stringify(winningCombos[i]).slice(1, this.length - 1);
-    //     console.log(stringWins);
-    //     if (stringShots.includes(stringWins)) return true;
-    // }
-
-    // return false;
 
     for (let i = 0; i < winningCombos.length; i++) {
         // if array of player's shots contains all elements of whichever of sub-arrays in winningCombos, he wins
